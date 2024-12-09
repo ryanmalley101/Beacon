@@ -22,7 +22,12 @@ import pynmea2
 import serial
 
 import RPi.GPIO as GPIO
-from mfrc522 import SimpleMFRC522
+from mfrc522 import MFRC522, SimpleMFRC522
+
+
+class PatchedSimpleMFRC522(SimpleMFRC522):
+    def __init__(self, **kwargs):
+        self.READER = MFRC522(**kwargs)
 
 try:
     # Button A
@@ -57,13 +62,14 @@ try:
     # on the transmitter and receiver (or be set to None to disable/the default).
     rfm69.encryption_key = b'\x01\x02\x03\x04\x05\x06\x07\x08\x01\x02\x03\x04\x05\x06\x07\x08'
 
-    reader = SimpleMFRC522()
+    reader = PatchedSimpleMFRC522(pin_rst=17)
 
     port = "/dev/ttyAMA0"
     ser = serial.Serial(port, baudrate=9600, timeout=0.5)
     dataout = pynmea2.NMEAStreamReader()
 
     while True:
+        print("Starting Loop")
         packet = None
         # draw a box to clear the image
         display.fill(0)

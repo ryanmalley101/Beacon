@@ -18,6 +18,7 @@ import adafruit_ssd1306
 import adafruit_rfm69
 
 import RPi.GPIO as GPIO
+
 # Button A
 btnA = DigitalInOut(board.D5)
 btnA.direction = Direction.INPUT
@@ -49,6 +50,8 @@ prev_packet = None
 # Optionally set an encryption key (16 byte AES key). MUST match both
 # on the transmitter and receiver (or be set to None to disable/the default).
 rfm69.encryption_key = b'\x01\x02\x03\x04\x05\x06\x07\x08\x01\x02\x03\x04\x05\x06\x07\x08'
+
+
 try:
     while True:
         packet = None
