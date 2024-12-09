@@ -78,7 +78,7 @@ try:
         display.fill(0)
         display.text('RasPi Radio', 35, 0, 1)
         # check for packet rx
-        packet = rfm69.receive()
+        # packet = rfm69.receive()
         if packet is None:
             display.show()
             line = ser.readline()
