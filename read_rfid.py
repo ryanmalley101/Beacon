@@ -10,7 +10,7 @@ class PatchedSimpleMFRC522(SimpleMFRC522):
         self.BasicMFRC522 = BasicMFRC522()
 
 
-reader = PatchedSimpleMFRC522(pin_rst=17)
+reader = PatchedSimpleMFRC522(pin_rst=17,gpio_mode=GPIO.BCM)
 
 try:
     id, text = reader.read()
